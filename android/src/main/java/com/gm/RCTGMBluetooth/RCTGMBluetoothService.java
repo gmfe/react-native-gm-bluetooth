@@ -9,7 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
-import static com.gm.RCTGMBluetooth.RCTGMBluetooth.TAG;
+import static com.gm.RCTGMBluetooth.RCTGMBluetoothPackage.TAG;
 
 /**
  * This class does all the work for setting up and managing Bluetooth
