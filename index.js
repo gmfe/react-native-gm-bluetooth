@@ -1,14 +1,14 @@
 const ReactNative = require('react-native')
 const { Buffer } = require('buffer')
 const { NativeModules, DeviceEventEmitter } = ReactNative
-const BluetoothSerial = NativeModules.BluetoothSerial
+const GMBluetooth = NativeModules.GMBluetooth
 
 /**
  * Listen for available events
  * @param  {String} eventName Name of event one of connectionSuccess, connectionLost, data, rawData
  * @param  {Function} handler Event handler
  */
-BluetoothSerial.on = (eventName, handler) => {
+GMBluetooth.on = (eventName, handler) => {
   DeviceEventEmitter.addListener(eventName, handler)
 }
 
@@ -17,7 +17,7 @@ BluetoothSerial.on = (eventName, handler) => {
  * @param  {String} eventName Name of event one of connectionSuccess, connectionLost, data, rawData
  * @param  {Function} handler Event handler
  */
-BluetoothSerial.removeListener = (eventName, handler) => {
+GMBluetooth.removeListener = (eventName, handler) => {
   DeviceEventEmitter.removeListener(eventName, handler)
 }
 
@@ -27,11 +27,11 @@ BluetoothSerial.removeListener = (eventName, handler) => {
  * @param  {Buffer|String} data
  * @return {Promise<Boolean>}
  */
-BluetoothSerial.write = (data) => {
+GMBluetooth.write = (data) => {
   if (typeof data === 'string') {
     data = new Buffer(data)
   }
-  return BluetoothSerial.writeToDevice(data.toString('base64'))
+  return GMBluetooth.writeToDevice(data.toString('base64'))
 }
 
-module.exports = BluetoothSerial
+module.exports = GMBluetooth

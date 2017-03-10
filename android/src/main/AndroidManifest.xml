@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gm.RCTBluetoothSerial">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gm.RCTGMBluetooth">
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 </manifest>

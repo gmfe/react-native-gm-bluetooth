@@ -1,4 +1,4 @@
-package com.gm.RCTBluetoothSerial;
+package com.gm.RCTGMBluetooth;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -9,7 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
-import static com.gm.RCTBluetoothSerial.RCTBluetoothSerialPackage.TAG;
+import static com.gm.RCTGMBluetooth.RCTGMBluetooth.TAG;
 
 /**
  * This class does all the work for setting up and managing Bluetooth
@@ -20,7 +20,7 @@ import static com.gm.RCTBluetoothSerial.RCTBluetoothSerialPackage.TAG;
  * This code was based on the Android SDK BluetoothChat Sample
  * $ANDROID_SDK/samples/android-17/BluetoothChat
  */
-class RCTBluetoothSerialService {
+class RCTGMBluetoothService {
     // Debugging
     private static final boolean D = true;
 
@@ -31,7 +31,7 @@ class RCTBluetoothSerialService {
     private BluetoothAdapter mAdapter;
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
-    private RCTBluetoothSerialModule mModule;
+    private RCTGMBluetoothModule mModule;
     private String mState;
 
     // Constants that indicate the current connection state
@@ -40,10 +40,10 @@ class RCTBluetoothSerialService {
     private static final String STATE_CONNECTED = "connected";  // now connected to a remote device
 
     /**
-     * Constructor. Prepares a new RCTBluetoothSerialModule session.
+     * Constructor. Prepares a new RCTGMBluetoothModule session.
      * @param module Module which handles service events
      */
-    RCTBluetoothSerialService(RCTBluetoothSerialModule module) {
+    RCTGMBluetoothService(RCTGMBluetoothModule module) {
         mAdapter = BluetoothAdapter.getDefaultAdapter();
         mState = STATE_NONE;
         mModule = module;
@@ -155,7 +155,7 @@ class RCTBluetoothSerialService {
      */
     private void connectionFailed() {
         mModule.onConnectionFailed("Unable to connect to device"); // Send a failure message
-        RCTBluetoothSerialService.this.stop(); // Start the service over to restart listening mode
+        RCTGMBluetoothService.this.stop(); // Start the service over to restart listening mode
     }
 
     /**
@@ -163,7 +163,7 @@ class RCTBluetoothSerialService {
      */
     private void connectionLost() {
         mModule.onConnectionLost("Device connection was lost");  // Send a failure message
-        RCTBluetoothSerialService.this.stop(); // Start the service over to restart listening mode
+        RCTGMBluetoothService.this.stop(); // Start the service over to restart listening mode
     }
 
     /**
@@ -227,7 +227,6 @@ class RCTBluetoothSerialService {
                 mModule.onError(e);
 
                 // Some 4.1 devices have problems, try an alternative way to connect
-                // See https://github.com/don/RCTBluetoothSerialModule/issues/89
                 try {
                     Log.i(TAG,"Trying fallback...");
                     mmSocket = (BluetoothSocket) mmDevice.getClass().getMethod("createRfcommSocket", new Class[] {int.class}).invoke(mmDevice,1);
@@ -248,7 +247,7 @@ class RCTBluetoothSerialService {
             }
 
             // Reset the ConnectThread because we're done
-            synchronized (RCTBluetoothSerialService.this) {
+            synchronized (RCTGMBluetoothService.this) {
                 mConnectThread = null;
             }
 
@@ -310,7 +309,7 @@ class RCTBluetoothSerialService {
                     Log.e(TAG, "disconnected", e);
                     mModule.onError(e);
                     connectionLost();
-                    RCTBluetoothSerialService.this.stop(); // Start the service over to restart listening mode
+                    RCTGMBluetoothService.this.stop(); // Start the service over to restart listening mode
                     break;
                 }
             }
