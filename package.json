@@ -1,25 +1,27 @@
 {
-  "name": "react-native-bluetooth-serial",
-  "version": "0.1.6",
-  "description": "'Bluetooth serial for react native'",
+  "name": "react-native-gm-bluetooth",
+  "version": "0.1.1",
+  "description": "react-native-gm-bluetooth",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rusel1989/react-native-bluetooth-serial.git"
+    "url": "git+https://github.com/gmfe/react-native-gm-bluetooth.git"
   },
   "keywords": [
     "bluetooth",
-    "react-native"
+    "react-native",
+    "weight",
+    "print"
   ],
-  "author": "Jakub Martyčák <martycakjakub@gmail.com>",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rusel1989/react-native-bluetooth-serial/issues"
+    "url": "https://github.com/gmfe/react-native-gm-bluetooth/issues"
   },
-  "homepage": "https://github.com/rusel1989/react-native-bluetooth-serial#readme",
+  "homepage": "https://github.com/gmfe/react-native-gm-bluetooth#readme",
   "dependencies": {
     "buffer": "^4.6.0"
   },
