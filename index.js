@@ -1,7 +1,8 @@
-const ReactNative = require('react-native')
-const { Buffer } = require('buffer')
-const { NativeModules, DeviceEventEmitter } = ReactNative
-const GMBluetooth = NativeModules.GMBluetooth
+const ReactNative = require('react-native');
+const {Buffer} = require('buffer');
+const {NativeModules, DeviceEventEmitter} = ReactNative;
+const GMBluetooth = NativeModules.GMBluetooth;
+const PrintTool = require('./print_tool');
 
 /**
  * Listen for available events
@@ -9,8 +10,8 @@ const GMBluetooth = NativeModules.GMBluetooth
  * @param  {Function} handler Event handler
  */
 GMBluetooth.on = (eventName, handler) => {
-  DeviceEventEmitter.addListener(eventName, handler)
-}
+    DeviceEventEmitter.addListener(eventName, handler)
+};
 
 /**
  * Stop listening for event
@@ -18,8 +19,8 @@ GMBluetooth.on = (eventName, handler) => {
  * @param  {Function} handler Event handler
  */
 GMBluetooth.removeListener = (eventName, handler) => {
-  DeviceEventEmitter.removeListener(eventName, handler)
-}
+    DeviceEventEmitter.removeListener(eventName, handler)
+};
 
 /**
  * Write data to device, you can pass string or buffer,
@@ -28,10 +29,12 @@ GMBluetooth.removeListener = (eventName, handler) => {
  * @return {Promise<Boolean>}
  */
 GMBluetooth.write = (data) => {
-  if (typeof data === 'string') {
-    data = new Buffer(data)
-  }
-  return GMBluetooth.writeToDevice(data.toString('base64'))
-}
+    if (typeof data === 'string') {
+        data = new Buffer(data)
+    }
+    return GMBluetooth.writeToDevice(data.toString('base64'))
+};
 
-module.exports = GMBluetooth
+GMBluetooth.PrintTool = PrintTool;
+
+module.exports = GMBluetooth;
