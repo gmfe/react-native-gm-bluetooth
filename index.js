@@ -2,7 +2,8 @@ const ReactNative = require('react-native');
 const {Buffer} = require('buffer');
 const {NativeModules, DeviceEventEmitter} = ReactNative;
 const GMBluetooth = NativeModules.GMBluetooth;
-const PrintTool = require('./print_tool');
+const TSC = require('./js/tsc');
+const ESC = require('./js/esc');
 
 /**
  * Listen for available events
@@ -35,6 +36,10 @@ GMBluetooth.write = (data) => {
     return GMBluetooth.writeToDevice(data.toString('base64'))
 };
 
-GMBluetooth.PrintTool = PrintTool;
+GMBluetooth.TSC = TSC;
+GMBluetooth.ESC = ESC;
+
+ESC._setBT(GMBluetooth);
+TSC._setBT(GMBluetooth);
 
 module.exports = GMBluetooth;

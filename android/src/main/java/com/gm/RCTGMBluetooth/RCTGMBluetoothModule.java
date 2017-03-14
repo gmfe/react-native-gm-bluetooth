@@ -376,7 +376,7 @@ public class RCTGMBluetoothModule extends ReactContextBaseJavaModule implements 
     public void writeTextToDevice(String Text, Promise promise){
         byte[] send;
         try {
-            send = Text.getBytes("GBK");
+            send = Text.getBytes("GB2312");
         } catch (Exception e) {
             send = Text.getBytes();
         }
