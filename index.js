@@ -4,6 +4,7 @@ const {NativeModules, DeviceEventEmitter} = ReactNative;
 const GMBluetooth = NativeModules.GMBluetooth;
 const TSC = require('./js/tsc');
 const ESC = require('./js/esc');
+const Util = require('./js/util');
 
 /**
  * Listen for available events
@@ -38,6 +39,7 @@ GMBluetooth.write = (data) => {
 
 GMBluetooth.TSC = TSC;
 GMBluetooth.ESC = ESC;
+GMBluetooth.Util = Util;
 
 ESC._setBT(GMBluetooth);
 TSC._setBT(GMBluetooth);
