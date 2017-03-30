@@ -132,6 +132,53 @@ RCT_EXPORT_METHOD(writeToDevice:(NSString *)message
     }
 }
 
+RCT_EXPORT_METHOD(writeTextToDevice:(NSString *)text
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejector:(RCTPromiseRejectBlock)reject)
+{
+    NSLog(@"write");
+    if (text != nil) {
+        NSData *data = nil;
+        NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        data = [text dataUsingEncoding:enc];
+        [_bleShield write:data];
+        resolve((id)kCFBooleanTrue);
+    } else {
+        NSError *err = nil;
+        reject(@"no_data", @"Data was null", err);
+    }
+}
+
+RCT_EXPORT_METHOD(writeHexToDevice:(NSString *)hexString
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejector:(RCTPromiseRejectBlock)reject)
+{
+    NSLog(@"write");
+    NSData *data = [self hexToBytes:hexString];
+    [_bleShield write:data];
+    if (hexString != nil) {
+        resolve((id)kCFBooleanTrue);
+    } else {
+        NSError *err = nil;
+        reject(@"no_data", @"Data was null", err);
+    }
+}
+
+-(NSData*) hexToBytes:(NSString *)hexString {
+    hexString = [hexString stringByReplacingOccurrencesOfString:@" " withString: @""];
+    NSMutableData* data = [NSMutableData data];
+    int idx;
+    for (idx = 0; idx+2 <= hexString.length; idx+=2) {
+        NSRange range = NSMakeRange(idx, 2);
+        NSString* hexStr = [hexString substringWithRange:range];
+        NSScanner* scanner = [NSScanner scannerWithString:hexStr];
+        unsigned int intValue;
+        [scanner scanHexInt:&intValue];
+        [data appendBytes:&intValue length:1];
+    }
+    return data;
+}
+
 RCT_EXPORT_METHOD(list:(RCTPromiseResolveBlock)resolve
                   rejector:(RCTPromiseRejectBlock)reject)
 {

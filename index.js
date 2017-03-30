@@ -1,10 +1,14 @@
 const ReactNative = require('react-native');
 const {Buffer} = require('buffer');
-const {NativeModules, DeviceEventEmitter} = ReactNative;
-const GMBluetooth = NativeModules.GMBluetooth;
+const {NativeModules, DeviceEventEmitter, Platform} = ReactNative;
 const TSC = require('./js/tsc');
 const ESC = require('./js/esc');
 const Util = require('./js/util');
+
+let GMBluetooth = NativeModules.GMBluetooth;
+if(Platform.OS === 'ios'){
+    GMBluetooth = NativeModules.BluetoothSerial;
+}
 
 /**
  * Listen for available events
