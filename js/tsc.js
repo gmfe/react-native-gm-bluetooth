@@ -53,6 +53,12 @@ const TSC = {
     },
     sound(times = 2, time = 100){
         writeTextToDevice(`SOUND ${times},${time}\r\n`);
+    },
+    drawBox(x_start,y_start,x_end,y_end,line_thickness){
+        writeTextToDevice(`BOX ${x_start},${y_start},${x_end},${y_end},${line_thickness}\r\n`);
+    },
+    drawBar(x,y,width,height){
+        writeTextToDevice(`BAR ${x},${y},${width},${height}\r\n`);
     }
 }
 
