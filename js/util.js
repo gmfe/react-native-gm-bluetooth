@@ -1,4 +1,4 @@
-const _ = require('underscore');
+const _ = require('lodash');
 
 function isChinese(word) {
     const charCode = word.charCodeAt(0);
