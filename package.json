@@ -1,6 +1,6 @@
 {
   "name": "react-native-gm-bluetooth",
-  "version": "0.39.4",
+  "version": "0.39.5",
   "description": "react-native-gm-bluetooth",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,6 @@
   },
   "peerDependencies": {
     "react-native": ">=0.40",
-    "underscore": "^1.8.3"
+    "lodash": "^4.17.4"
   }
 }
