@@ -59,6 +59,9 @@ const TSC = {
     },
     drawBar(x,y,width,height){
         writeTextToDevice(`BAR ${x},${y},${width},${height}\r\n`);
+    },
+    drawQrcode(x,y,ecc_level,cell_width,mode,rotation,qrcode_content){
+        writeTextToDevice(`QRCODE ${x},${y},${ecc_level},${cell_width},${mode},${rotation},"${qrcode_content},"\r\n`)
     }
 }
 
